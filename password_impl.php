@@ -22,4 +22,7 @@ interface password_impl
 
     public function CRYPTO_SHUFFLE(array $ARRAY): void;
 
+    public function GET_UNBIASED_CHAR($CHARSET, &$POOL, &$INDEX);
+    public function IS_VALID_PASSWORD($PASSWORD, $LEN, $REQS);
+    public function GENERATE_PASSWORD($LEN, $REQS);
 }
