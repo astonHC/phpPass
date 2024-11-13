@@ -31,7 +31,30 @@ class Password implements password_impl
     {
         // DISCERN THE ELEMENTS WITHIN THE ARRAY
 
-        $NTH_ELEMNENT = count($ARRAY);
+        $NTH_ELEMENT = count($ARRAY);
+
+        // ASSUME THAT THE ARRAY IS EMPTY
+
+        if($NTH_ELEMENT <= 1) { return; }
+
+        try
+        {
+            // NOW DISCERN HOW MANY ELEMENTS ARE WITHIN THE ARRAY
+            // AND CREATE A NEW ITERATION TO PRODUCE A RANDOM RESULT FROM
+
+            // LOOK FOR ALL POSSIBLE CONCURRENT ELEMENTS WITHIN THE ARRAY TO BE ABLE TO SWAP AROUND
+
+            for($INDEX = $NTH_ELEMENT - 1; $INDEX > 0; $INDEX--)
+            {
+                $NEW_ITER = random_int(0, $INDEX);
+                [$ARRAY[$INDEX], [$ARRAY[$NEW_ITER]] = [$ARRAY[$NEW_ITER], $ARRAY[$INDEX]]];
+            }
+        }
+
+        catch (Exception $EX)
+        {
+            throw new Exception('Failed to generate random numbers: ' . $EX->getMessage());
+        }
     }
 }
 
