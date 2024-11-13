@@ -222,3 +222,43 @@ class Password
         return $PASSWORD;
     }
 }
+
+///////////////////////////////////////////////////////////
+//              PHP POST AND GET FUNCTONALITY
+//=========================================================
+//      THIS IS TO COMM. WITH THE AJAX HANDLER WHICH PARSES
+//  THIS INFORMATION THROUGH IT'S RESPECTIVE FUNCTION CALL
+///////////////////////////////////////////////////////////
+
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') 
+{
+    http_response_code(405);
+    echo json_encode(['error' => 'Method Not Allowed']);
+    exit;
+}
+
+$data = json_decode(file_get_contents("php://input"), true);
+error_log(print_r($data, true)); 
+
+if (isset($data['length']) && isset($data['requirements'])) 
+{
+    try 
+    {
+        $passwordGenerator = new Password();
+        $password = $passwordGenerator->GENERATE_PASSWORD($data['length'], (object)$data['requirements']);
+        echo json_encode(['password' => $password]);
+    } 
+    catch (Exception $e) 
+    {
+        http_response_code(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+} 
+else 
+{
+    http_response_code(400);
+    echo json_encode(['error' => 'Invalid input']);
+}
+
+?>
