@@ -12,7 +12,6 @@ $(document).ready(function()
     // HANDLES THE TOGGLE OF THE PASSWORD GENERATOR CONTROL PANEL
     $('#useGenerator').on('change', function() 
     {
-        // SHOWS THE CONTROL PANEL IF THE TOGGLE IS CHECKED
         if ($(this).is(':checked')) 
         {
             $('#generatorControls').slideDown(); 
@@ -27,7 +26,6 @@ $(document).ready(function()
     // HANDLES THE CLICK EVENT OF THE GENERATE BUTTON
     $('#generateBtn').on('click', function() 
     {
-        // HIDES ANY EXISTING ERROR MESSAGES
         $('#errorMessage').hide();
 
         // CHECKS IF AT LEAST ONE CHARACTER TYPE IS SELECTED
