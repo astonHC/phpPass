@@ -18,7 +18,21 @@ define('MULTI', 2);
 
 class Password implements password_impl
 {
+    // JUST ACCESS THE SECURE BYTES OF THE RANDOMLY GENERATED HASH
+
     public function GET_SECURE_BYTES($LEN) { return random_bytes($LEN); }
+
+    // CREATES A CRYPTOGRAPHICALLY SECURE RE-ARRANGEMENT BASED ON THE CURRENT
+    // ELEMENTS IN AN GIVEN ARRAY OF CHARACTERS
+
+    // SEE FISHER-YATES SHUFFLE: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+
+    public function CRYPTO_SHUFFLE(array $ARRAY): void
+    {
+        // DISCERN THE ELEMENTS WITHIN THE ARRAY
+
+        $NTH_ELEMNENT = count($ARRAY);
+    }
 }
 
 ?>
