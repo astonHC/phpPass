@@ -16,4 +16,9 @@ define('MAX_PASSWORD_LEN', 128);
 define('MIN_PASSWORD_LEN', 12);
 define('MULTI', 2);
 
+class Password implements password_impl
+{
+    public function GET_SECURE_BYTES($LEN) { return random_bytes($LEN); }
+}
+
 ?>
