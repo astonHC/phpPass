@@ -18,4 +18,8 @@ interface password_impl
 
     public function GET_SECURE_BYTES($LEN);
 
+    // CONCATENATING AS VOID LIKE THIS DISCERNS NO NEEDED LOCAL ARGS
+
+    public function CRYPTO_SHUFFLE(array $ARRAY): void;
+
 }
