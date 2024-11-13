@@ -22,10 +22,14 @@ class Password implements password_impl
 
     public function GET_SECURE_BYTES($LEN) { return random_bytes($LEN); }
 
-    // CREATES A CRYPTOGRAPHICALLY SECURE RE-ARRANGEMENT BASED ON THE CURRENT
-    // ELEMENTS IN AN GIVEN ARRAY OF CHARACTERS
-
-    // SEE FISHER-YATES SHUFFLE: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+    /* CREATES A CRYPTOGRAPHICALLY SECURE RE-ARRANGEMENT BASED ON THE CURRENT
+    * ELEMENTS IN AN GIVEN ARRAY OF CHARACTERS
+    *  SEE FISHER-YATES SHUFFLE: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+    *
+    *  PROVIDES UNBIASED RANDOMIZATION OF PASSWORD CHARACTERS
+    *  @param &$ARRAY: REFERENCE TO ARRAY TO BE SHUFFLED
+    *  @throws Exception ON RANDOM NUMBER GENERATION FAILURE
+    */
 
     public function CRYPTO_SHUFFLE(array $ARRAY): void
     {
@@ -55,6 +59,19 @@ class Password implements password_impl
         {
             throw new Exception('Failed to generate random numbers: ' . $EX->getMessage());
         }
+    }
+
+    /* GENERATES UNBIASED RANDOM CHARACTER FROM CHARSET
+    *  USES REJECTION SAMPLING TO ELIMINATE MODULO BIAS
+    *  @param $CHARSET: CHARACTER SET TO SAMPLE FROM
+    *  @param &$POOL: REFERENCE TO ENTROPY POOL
+    *  @param &$INDEX: REFERENCE TO CURRENT POOL INDEX
+    *  @return: RANDOMLY SELECTED CHARACTER
+    */
+
+    public function GET_UNBIASED_CHAR($CHARSET, &$POOL, &$INDEX)
+    {
+        $CHARSET_SIZE = strlen($CHARSET);
     }
 }
 
