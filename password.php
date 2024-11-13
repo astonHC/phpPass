@@ -72,6 +72,38 @@ class Password implements password_impl
     public function GET_UNBIASED_CHAR($CHARSET, &$POOL, &$INDEX)
     {
         $CHARSET_SIZE = strlen($CHARSET);
+        $MAX_VALID = (PHP_INT_MAX - (PHP_INT_MAX % $CHARSET_SIZE));
+
+        // ASSUME THAT THE LENGTH OF THE STRING IS INDICATIVE OF THE PRE-REQUSITIES
+
+        do 
+        {
+            if ($INDEX >= strlen($POOL))
+            {
+                $POOL = $this->GET_SECURE_BYTES(strlen($POOL));
+                $INDEX = 0;
+            }
+
+            // ASSUME WE HAVE AN INDICATIVE MATCH, READ THE FIRST 4 BYTES
+            // OF THE ENTROPY POOL TO DISCERN A VALID BITWISE LENGTH 
+
+            $RANDOM = unpack('N', substr($POOL, $INDEX, 4))[1];
+            $INDEX += 4;
+
+        } while ($RANDOM > $MAX_VALID);
+
+        return $CHARSET[$RANDOM % $CHARSET_SIZE];
+    }
+
+
+    public function IS_VALID_PASSWORD($PASSWORD, $LEN, $REQS)
+    {
+
+    }
+
+    public function GENERATE_PASSWORD($LEN, $REQS)
+    {
+
     }
 }
 
