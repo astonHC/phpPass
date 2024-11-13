@@ -1,7 +1,7 @@
 # phpPass
 A Generic all purpose PHP Password Generator (CS2_TP) 
 
-# Motive:
+## Motive:
 
 The ambition behind this repository is to provide an ease of use means of implementing a series of hashing and randomisation
 to be able to conjure up various randomised passwords for a User Sign up field on a Website.
